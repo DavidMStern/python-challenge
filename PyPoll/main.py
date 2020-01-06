@@ -6,6 +6,8 @@ import csv
 poll_data = os.path.join('Resources', 'election_data.csv')
 
 with open(poll_data, newline = "") as csvfile:
+    # Read file to variable
+    read_poll = csv.reader(csvfile, delimiter = ',')
 
     # Skip Header
     next(csvfile)
@@ -18,7 +20,7 @@ with open(poll_data, newline = "") as csvfile:
     otooley_votes = 0
 
     # Looping through the data
-    for row in csv.reader(csvfile, delimiter = ','):
+    for row in read_poll:
         # Tally up the voters
         voter_total += 1
 
