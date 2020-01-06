@@ -2,13 +2,14 @@
 import os
 import csv
 
-# Read the csv file and assign it to a variable
+# Assign the csv file to a variable and open it
 budget_data = os.path.join('Resources', 'budget_data.csv')
 
 with open(budget_data, newline="") as csvfile:
+    # Read the file to a variable
     read_data = csv.reader(csvfile, delimiter=",")
     
-    # Read the header row
+    # Read/skip the header row
     csv_header = next(csvfile)
     
     # Assign variable that will be changed
@@ -20,7 +21,7 @@ with open(budget_data, newline="") as csvfile:
     greatest_decrease = 0
     
     # Read through file
-    for row in csv.reader(csvfile):
+    for row in read_data:
         # Increase month count each row
         months += 1
         
@@ -30,7 +31,7 @@ with open(budget_data, newline="") as csvfile:
         # Calculating the average change
         current_change = int(row[1])
         # This if statement is to ensure that there is no value stored to change_total on the first row
-        if previous_change == 0:
+        if read_data.line_num == 1:
             previous_change = int(row[1])
         change_total += (current_change - previous_change)
 
@@ -51,8 +52,8 @@ with open(budget_data, newline="") as csvfile:
 
     # Printing everything out
     print(f'Total months: {months}')
-    print(f'Total: ${net_total}')
+    print(f'Total: ${"{:,}".format(net_total)}')
     average_change = change_total / (months - 1)
-    print(f'Average change: {average_change}')
+    print(f'Average change: ${"{:,.2f}".format(average_change)}')
     print(f'Greatest profit increase: {gi_date} (${greatest_increase})')
     print(f'Greatest profit decrease: {gd_date} (${greatest_decrease})')
