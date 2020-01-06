@@ -55,5 +55,5 @@ with open(budget_data, newline="") as csvfile:
     print(f'Total: ${"{:,}".format(net_total)}')
     average_change = change_total / (months - 1)
     print(f'Average change: ${"{:,.2f}".format(average_change)}')
-    print(f'Greatest profit increase: {gi_date} (${greatest_increase})')
-    print(f'Greatest profit decrease: {gd_date} (${greatest_decrease})')
+    print(f'Greatest profit increase: {gi_date} (${"{:,}".format(greatest_increase)})')
+    print(f'Greatest profit decrease: {gd_date} (${"{:,}".format(greatest_decrease)})')
