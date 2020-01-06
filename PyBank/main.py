@@ -16,7 +16,7 @@ with open(budget_data, newline="") as csvfile:
     net_total = 0
     months = 0
     change_total = 0
-    previous_change = 0
+    previous_profit = 0
     greatest_increase = 0
     greatest_decrease = 0
     
@@ -29,26 +29,26 @@ with open(budget_data, newline="") as csvfile:
         net_total += int(row[1])
         
         # Calculating the average change
-        current_change = int(row[1])
+        current_profit = int(row[1])
         # This if statement is to ensure that there is no value stored to change_total on the first row
         if read_data.line_num == 1:
-            previous_change = int(row[1])
-        change_total += (current_change - previous_change)
+            previous_profit = int(row[1])
+        change_total += (current_profit - previous_profit  )
 
         # Calculating the greatest increase and greatest decrease
-        if current_change > previous_change:
-            current_increase = (current_change - previous_change)
+        if current_profit > previous_profit:
+            current_increase = (current_profit - previous_profit   )
             if current_increase > greatest_increase:
                 greatest_increase = current_increase
                 gi_date = str(row[0])
-        elif current_change < previous_change:
-            current_decrease = (current_change - previous_change)
+        elif current_profit < previous_profit  :
+            current_decrease = (current_profit - previous_profit   )
             if current_decrease < greatest_decrease:
                 greatest_decrease = current_decrease
                 gd_date = str(row[0])
         
-        # Setting current row to previous_change for use in the next row
-        previous_change = int(row[1])
+        # Setting current row to previous_profit    for use in the next row
+        previous_profit = int(row[1])
 
     # Printing everything out
     print(f'Total months: {months}')
